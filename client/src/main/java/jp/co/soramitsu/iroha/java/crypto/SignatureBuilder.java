@@ -8,6 +8,8 @@ import java.security.KeyPair;
 public interface SignatureBuilder {
     Primitive.Signature sign(Hashable toSign, KeyPair keyPair);
 
+    Primitive.Signature sign(Hashable toSign, byte[] rawSignature, String publicKey);
+
     String getHexPublicKey(KeyPair keyPair);
 
     class CryptoException extends RuntimeException {

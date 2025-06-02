@@ -26,6 +26,14 @@ public class Ed25519Sha3SignatureBuilder implements SignatureBuilder {
   }
 
   @Override
+    public Primitive.Signature sign(Hashable toSign, byte[] rawSignature, String publicKey) {
+        return Primitive.Signature.newBuilder()
+            .setSignature(Utils.toHex(rawSignature))
+            .setPublicKey(publicKey)
+            .build();
+    }
+
+  @Override
   public String getHexPublicKey(KeyPair keyPair) {
     return Utils.toHex(keyPair.getPublic().getEncoded());
   }

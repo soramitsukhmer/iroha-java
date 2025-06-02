@@ -73,6 +73,13 @@ public class Transaction
   }
 
   @Override
+  public BuildableAndSignable<TransactionOuterClass.Transaction> sign(byte[] rawSignature, String publicKey) {
+    updatePayload();
+    tx.addSignatures(Ed25519Sha3SignatureBuilder.getInstance().sign(this, rawSignature, publicKey));
+    return this;
+  }
+
+  @Override
   public TransactionOuterClass.Transaction build() {
     updatePayload();
     return tx.build();
