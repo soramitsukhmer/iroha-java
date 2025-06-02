@@ -1,10 +1,11 @@
 plugins {
     id 'com.adarshr.test-logger' version '1.6.0'
+    id 'maven-publish'
 }
 
 allprojects {
-    group 'hyperledger'
-    version = "1.0"
+    group "com.soramitsukhmer.iroha-java"
+    version = "7.0.1-rc.1"
 }
 
 subprojects {
@@ -44,4 +45,27 @@ subprojects {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.10'
+}
+
+publishing {
+    publications {
+        subprojects.each { subproject ->
+            "${subproject.name}Jar"(MavenPublication) {
+                from subproject.components.java
+                groupId = "com.soramitsukhmer.iroha-java"
+                artifactId = "${subproject.name}"
+                version = "7.0.1-rc.1"
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = 'https://maven.pkg.github.com/soramitsukhmer/iroha-java'
+            credentials {
+                username = System.getenv("GIT_PUBLISH_USER")
+                password = System.getenv("GIT_PUBLISH_PASSWORD")
+            }
+        }
+    }
 }
