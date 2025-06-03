@@ -17,5 +17,7 @@ public interface BuildableAndSignable<T> {
 
   BuildableAndSignable<T> sign(byte[] rawSignature, String publicKey) throws CryptoException;
 
+  byte[] getPayloadHashForSign() throws CryptoException;
+
   T build();
 }

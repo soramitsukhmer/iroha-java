@@ -5,7 +5,7 @@ plugins {
 
 allprojects {
     group "com.soramitsukhmer.iroha-java"
-    version = "7.0.1-rc.2"
+    version = "7.0.1-rc.3"
 }
 
 subprojects {
@@ -54,7 +54,7 @@ publishing {
                 from subproject.components.java
                 groupId = "com.soramitsukhmer.iroha-java"
                 artifactId = "${subproject.name}"
-                version = "7.0.1-rc.2"
+                version = "7.0.1-rc.3"
             }
         }
     }
